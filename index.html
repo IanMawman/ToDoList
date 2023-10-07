@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+
+</head>
+<body>
+    <div class="container" >
+        <h2  style="text-align: center;" >To Do List</h2>
+        <form id="taskForm">
+            <div class="form-group">
+                <label for="task">Task:</label>
+                <input type="text" class="form-control" id="task" placeholder="Enter task" name="task"> <!--This is where you enter a new task -->
+            </div>
+            <button type="submit" class="btn btn-primary">Add Task</button> 
+        </form>
+        <ul id="taskList" class="list-group mt-3"><!--This is where the appended child goes when adding a new task -->
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Add task to the list
+            $('#taskForm').on('submit', function(e) {
+                e.preventDefault(); // Prevents the form from being submitted
+                let task = $('#task').val(); //checks if task has a value 
+                if (task) { // if task has a value it adds a new line under tasklist with the value and a remove button 
+                    $('#taskList').append('<li class="list-group-item">' + task + '<button type="button" class="btn btn-danger btn-sm float-right ml-1">Remove</button></li>');
+                    $('#task').val('');
+                }
+            });
+
+            // Checks if the remove button is pressed and if it does it removes it from tasklist
+            $('#taskList').on('click', '.btn-danger', function() {
+                $(this).parent().remove();
+            });
+        });
+    </script>
+</body>
+</html>
